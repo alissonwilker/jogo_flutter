@@ -6,11 +6,14 @@ const jogoLargura = 1000.0;
 const jogoAltura = 500.0;
 
 void main() {
-  runApp(FittedBox(
+  runApp(
+    FittedBox(
       child: SizedBox(
         width: jogoLargura,
         height: jogoAltura,
-        child: GameWidget(game: Jogo()),
+        child: GameWidget(
+          game: Jogo()
+        ),
       )
     )
   );

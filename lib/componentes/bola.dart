@@ -8,7 +8,7 @@ class Bola extends CircleComponent with CollisionCallbacks {
 
   final Vector2 velocity;
 
-  Bola({required this.velocity, super.position})
+  Bola({required this.velocity, super.key, super.position})
       : super(
           radius: raio,
           anchor: Anchor.topLeft,
