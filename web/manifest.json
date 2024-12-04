@@ -1,6 +1,6 @@
 {
-    "name": "flame_app",
-    "short_name": "flame_app",
+    "name": "jogo_flutter",
+    "short_name": "jogo_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

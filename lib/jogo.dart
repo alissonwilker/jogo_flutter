@@ -1,23 +1,19 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/widgets.dart';
 import 'componentes/area_jogo.dart';
 import 'componentes/bola.dart';
-import 'constantes.dart';
 
-class Jogo extends FlameGame {
-
+class Jogo extends FlameGame with HasCollisionDetection {
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
-
     debugMode = true;
-
     camera.viewfinder.anchor = Anchor.topLeft;
 
-    world.add(AreaJogo(areaJogoComprimento, areaJogoAltura));
-    world.add(Bola(velocidade: Vector2(100, 100), position: Vector2(100, 100)));
+    world.add(AreaJogo(size: size));
+    world.add(Bola(velocity: Vector2(size.x / 5, size.y / 2)));
   }
   
 }
