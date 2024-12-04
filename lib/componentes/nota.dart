@@ -2,14 +2,19 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:jogo_flutter/componentes/area_jogo.dart';
+import 'package:jogo_flutter/componentes/hit.dart';
+import 'package:jogo_flutter/jogo.dart';
 
-class Bola extends CircleComponent with CollisionCallbacks {
+class Nota extends CircleComponent with CollisionCallbacks, HasGameReference<Jogo> {
   static const raio = 10.0;
 
-  final Vector2 velocity;
+  final Vector2 velocity = Vector2(-100, 0);
+  bool _hit = false;
+  bool _missed = false;
 
-  Bola({required this.velocity, super.key, super.position})
+  Nota({super.key})
       : super(
+          position: Vector2(500, 10),
           radius: raio,
           anchor: Anchor.topLeft,
           paint: Paint()
@@ -22,22 +27,25 @@ class Bola extends CircleComponent with CollisionCallbacks {
   void update(double dt) {
     super.update(dt);
     position += velocity * dt;
+
+    if (position.x < 200 - size.x && !_hit && !_missed) { 
+      _missed = true;
+      paint.color = Colors.red;
+      game.score.value -= 1;
+    }
   }
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
-    if (other is AreaJogo) {
-      if (position.y + size.y > other.position.y + other.size.y) {
-        velocity.y = -velocity.y;
-      } else if (position.y < other.position.y) {
-        velocity.y = -velocity.y;
-      } else if (position.x + size.x > other.position.x + other.size.x) {
-        velocity.x = -velocity.x;
-      } else if (position.x < other.position.x) {
-        velocity.x = -velocity.x;
-      }
+    if (other is Hit && !_hit) {
+      _hit = true;
+      game.score.value += 1;
+      paint.color = Colors.green;
+    } else if (other is AreaJogo) {
+      game.world.remove(this);
+      game.world.add(Nota());
     }
-
   }
+
 }

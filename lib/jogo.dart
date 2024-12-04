@@ -5,12 +5,15 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'componentes/hit.dart';
 import 'componentes/area_jogo.dart';
-import 'componentes/bola.dart';
+import 'componentes/nota.dart';
 
 class Jogo extends FlameGame with HasCollisionDetection, KeyboardEvents {
-  static const bola1 = 'bola1';
+  static const hit1 = 'hit1';
 
+  final ValueNotifier<int> score = ValueNotifier(0);
+  
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -18,7 +21,7 @@ class Jogo extends FlameGame with HasCollisionDetection, KeyboardEvents {
     camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(AreaJogo(size: size));
-    world.add(Bola(velocity: Vector2(size.x / 5, size.y / 2)));
+    world.add(Nota());
   }
 
   @override
@@ -29,9 +32,10 @@ class Jogo extends FlameGame with HasCollisionDetection, KeyboardEvents {
     switch (event.logicalKey) {
       case LogicalKeyboardKey.digit1:
         if (event is KeyDownEvent) {
-          world.add(Bola(key: ComponentKey.named(bola1), velocity: Vector2.zero()));
-        } else if (event is KeyUpEvent) {
-          world.removeWhere((elem) => elem.key == ComponentKey.named(bola1));
+          var hit = Hit(key: ComponentKey.named(hit1));
+          if (world.children.query<Hit>().where((hit) => hit.key == ComponentKey.named(hit1)).isEmpty) {
+            world.add(hit);
+          }
         }
     }
     return KeyEventResult.handled;
