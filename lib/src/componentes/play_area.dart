@@ -9,9 +9,9 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 import '../config.dart';
-import '../jogo.dart';
+import '../hitball_game.dart';
 
-class PlayArea extends RectangleComponent with HasGameReference<Jogo> {
+class PlayArea extends RectangleComponent with HasGameReference<HitBallGame> {
   PlayArea()
       : super(
           paint: Paint()..color = playAreaColor,

@@ -3,24 +3,24 @@ import 'package:flame/game.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../config.dart';
-import '../jogo.dart';
+import '../hitball_game.dart';
 import 'overlay_screen.dart';
 import 'score_card.dart';
 
-class JogoFlutter extends StatefulWidget {
-  const JogoFlutter({super.key});
+class HitBallGameWidget extends StatefulWidget {
+  const HitBallGameWidget({super.key});
 
   @override
-  State<JogoFlutter> createState() => _JogoFlutterState();
+  State<HitBallGameWidget> createState() => _HitBallGameWidgetState();
 }
 
-class _JogoFlutterState extends State<JogoFlutter> {
-  late final Jogo jogo;
+class _HitBallGameWidgetState extends State<HitBallGameWidget> {
+  late final HitBallGame game;
 
   @override
   void initState() {
     super.initState();
-    jogo = Jogo();
+    game = HitBallGame();
   }
 
   @override
@@ -50,27 +50,27 @@ class _JogoFlutterState extends State<JogoFlutter> {
                         padding: const EdgeInsets.all(16),
                         child: Center(
                             child: Column(children: [
-                          ScoreCard(score: jogo.score),
+                          ScoreCard(score: game.score),
                           Expanded(
                               child: FittedBox(
                                   child: SizedBox(
                             width: gameWidth,
                             height: gameHeight,
-                            child: GameWidget(game: jogo, overlayBuilderMap: {
+                            child: GameWidget(game: game, overlayBuilderMap: {
                               PlayState.welcome.name: (context, game) =>
                                   const OverlayScreen(
                                     title: 'JOGAR',
-                                    subtitle: 'Aperte 1 para acertar a nota',
+                                    subtitle: 'Aperte 1 para acertar a bola',
                                   ),
                               PlayState.gameOver.name: (context, game) =>
                                   const OverlayScreen(
                                     title: 'FIM',
-                                    subtitle: 'Aperte 1 para acertar a nota',
+                                    subtitle: 'Aperte 1 para acertar a bola',
                                   ),
                               PlayState.won.name: (context, game) =>
                                   const OverlayScreen(
                                     title: 'PARABÉNS',
-                                    subtitle: 'Aperte 1 para acertar a nota',
+                                    subtitle: 'Aperte 1 para acertar a bola',
                                   ),
                             }),
                           )))

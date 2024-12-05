@@ -1,4 +1,4 @@
 export 'hit.dart';
-export 'nota.dart';
+export 'ball.dart';
 export 'play_area.dart';
-export 'hit_line.dart';
+export 'hit_circle.dart';

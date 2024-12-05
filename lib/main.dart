@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'src/widgets/jogo_flutter.dart';
+import 'src/widgets/hitball_widget.dart';
 
 void main() {
-  runApp(const JogoFlutter());
+  runApp(const HitBallGameWidget());
 }

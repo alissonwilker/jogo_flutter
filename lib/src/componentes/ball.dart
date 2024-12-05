@@ -1,24 +1,24 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:jogo_flutter/src/jogo.dart';
+import 'package:jogo_flutter/src/hitball_game.dart';
 
 import '../config.dart';
 import 'components.dart';
 
-class Nota extends CircleComponent
-    with CollisionCallbacks, HasGameReference<Jogo> {
+class Ball extends CircleComponent
+    with CollisionCallbacks, HasGameReference<HitBallGame> {
   final Vector2 velocity = Vector2(-100, 0);
   bool _hit = false;
   bool _missed = false;
 
-  Nota({super.key})
+  Ball({super.key})
       : super(
-            position: Vector2(gameWidth - 2 * notaRaio, 10),
-            radius: notaRaio,
+            position: Vector2(gameWidth - 2 * ballRadius, 10),
+            radius: ballRadius,
             anchor: Anchor.topLeft,
             paint: Paint()
-              ..color = notaColor
+              ..color = ballColor
               ..style = PaintingStyle.fill,
             children: [CircleHitbox()]);
 
@@ -45,7 +45,7 @@ class Nota extends CircleComponent
     } else if (other is PlayArea) {
       game.world.remove(this);
       if (game.playState == PlayState.playing) {
-        game.world.add(Nota());
+        game.world.add(Ball());
       } else {
         game.world.removeAll(game.world.children.query<HitCircle>());
       }

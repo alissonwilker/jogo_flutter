@@ -10,9 +10,9 @@ import 'config.dart';
 
 enum PlayState { welcome, playing, gameOver, won }
 
-class Jogo extends FlameGame
+class HitBallGame extends FlameGame
     with HasCollisionDetection, KeyboardEvents {
-  Jogo()
+  HitBallGame()
       : super(
           camera: CameraComponent.withFixedResolution(
             width: gameWidth,
@@ -67,13 +67,13 @@ class Jogo extends FlameGame
   void startGame() {
     if (playState == PlayState.playing) return;
 
-    world.removeAll(world.children.query<Nota>());
+    world.removeAll(world.children.query<Ball>());
     world.removeAll(world.children.query<Hit>());
 
     playState = PlayState.playing;
     score.value = 0;
     
-    world.add(Nota());
+    world.add(Ball());
     world.add(HitCircle());
   }
 
@@ -103,5 +103,5 @@ class Jogo extends FlameGame
   }
 
   @override
-  Color backgroundColor() => jogoBackgroundColor;
+  Color backgroundColor() => gameBackgroundColor;
 }

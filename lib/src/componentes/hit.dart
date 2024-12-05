@@ -8,8 +8,8 @@ import '../config.dart';
 class Hit extends CircleComponent {
   Hit({super.key})
       : super(
-            radius: notaRaio,
-            position: Vector2(hitPositionX, notaRaio),
+            radius: ballRadius,
+            position: Vector2(hitPositionX, ballRadius),
             anchor: Anchor.topLeft,
             paint: Paint()
               ..color = hitColor
