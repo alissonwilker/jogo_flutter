@@ -60,17 +60,17 @@ class _HitBallGameWidgetState extends State<HitBallGameWidget> {
                               PlayState.welcome.name: (context, game) =>
                                   const OverlayScreen(
                                     title: 'JOGAR',
-                                    subtitle: 'Aperte 1 para acertar a bola',
+                                    subtitle: 'Pressione 1',
                                   ),
                               PlayState.gameOver.name: (context, game) =>
                                   const OverlayScreen(
                                     title: 'FIM',
-                                    subtitle: 'Aperte 1 para acertar a bola',
+                                    subtitle: 'Pressione 1',
                                   ),
                               PlayState.won.name: (context, game) =>
                                   const OverlayScreen(
-                                    title: 'PARABÉNS',
-                                    subtitle: 'Aperte 1 para acertar a bola',
+                                    title: 'PARABÉNS!',
+                                    subtitle: 'Pressione 1',
                                   ),
                             }),
                           )))
