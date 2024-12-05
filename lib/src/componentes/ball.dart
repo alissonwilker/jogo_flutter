@@ -1,5 +1,6 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 import 'package:jogo_flutter/src/hitball_game.dart';
 
@@ -20,17 +21,25 @@ class Ball extends CircleComponent
             paint: Paint()
               ..color = ballColor
               ..style = PaintingStyle.fill,
-            children: [CircleHitbox()]);
+            children: [CircleHitbox()]) {
+    opacity = 0;
+    add(OpacityEffect.fadeIn(LinearEffectController(2)));
+  }
 
   @override
   void update(double dt) {
     super.update(dt);
     position += velocity * dt;
 
-    if (position.x < hitPositionX - size.x/2 && !_hit && !_missed) {
-      _missed = true;
-      paint.color = Colors.red;
-      game.score.value -= 1;
+    if (position.x < hitPositionX - size.x / 2) {
+      if (opacity == 1) {
+        add(OpacityEffect.fadeOut(LinearEffectController(2)));
+      }
+      if (!_hit && !_missed) {
+        _missed = true;
+        paint.color = Colors.red;
+        game.score.value -= 1;
+      }
     }
   }
 
