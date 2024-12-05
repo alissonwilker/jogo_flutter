@@ -13,4 +13,4 @@ const notaColor = Color.fromARGB(255, 30, 96, 145);
 const playAreaColor = Color.fromARGB(255, 183, 239, 238);
 
 // chaves
-const hit1 = 'hit1';
+const hitKey = 'hitKey';

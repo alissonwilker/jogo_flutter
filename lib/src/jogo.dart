@@ -44,7 +44,7 @@ class Jogo extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
-    debugMode = true;
+    //debugMode = true;
     camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(PlayArea());
@@ -60,6 +60,10 @@ class Jogo extends FlameGame
     playState = PlayState.welcome;
   }
 
+  void gameFinished(PlayState state) {
+    playState = state;
+  }
+
   void startGame() {
     if (playState == PlayState.playing) return;
 
@@ -70,6 +74,7 @@ class Jogo extends FlameGame
     score.value = 0;
     
     world.add(Nota());
+    world.add(HitCircle());
   }
 
   @override
@@ -81,10 +86,10 @@ class Jogo extends FlameGame
       case LogicalKeyboardKey.digit1:
         if (event is KeyDownEvent) {
           if (playState == PlayState.playing) {
-          var hit = Hit(key: ComponentKey.named(hit1));
+          var hit = Hit(key: ComponentKey.named(hitKey));
             if (world.children
                 .query<Hit>()
-                .where((hit) => hit.key == ComponentKey.named(hit1))
+                .where((hit) => hit.key == ComponentKey.named(hitKey))
                 .isEmpty) {
               world.add(hit);
             }

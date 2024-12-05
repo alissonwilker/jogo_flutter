@@ -1,11 +1,10 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:jogo_flutter/src/componentes/play_area.dart';
-import 'package:jogo_flutter/src/componentes/hit.dart';
 import 'package:jogo_flutter/src/jogo.dart';
 
 import '../config.dart';
+import 'components.dart';
 
 class Nota extends CircleComponent
     with CollisionCallbacks, HasGameReference<Jogo> {
@@ -47,6 +46,8 @@ class Nota extends CircleComponent
       game.world.remove(this);
       if (game.playState == PlayState.playing) {
         game.world.add(Nota());
+      } else {
+        game.world.removeAll(game.world.children.query<HitCircle>());
       }
     }
   }
