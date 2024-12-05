@@ -60,10 +60,6 @@ class HitBallGame extends FlameGame
     playState = PlayState.welcome;
   }
 
-  void gameFinished(PlayState state) {
-    playState = state;
-  }
-
   void startGame() {
     if (playState == PlayState.playing) return;
 
