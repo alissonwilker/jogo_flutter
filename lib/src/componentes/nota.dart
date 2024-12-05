@@ -28,7 +28,7 @@ class Nota extends CircleComponent
     super.update(dt);
     position += velocity * dt;
 
-    if (position.x < hitLimit - size.x && !_hit && !_missed) {
+    if (position.x < hitPositionX - size.x/2 && !_hit && !_missed) {
       _missed = true;
       paint.color = Colors.red;
       game.score.value -= 1;
@@ -39,7 +39,7 @@ class Nota extends CircleComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
-    if (other is Hit && !_hit) {
+    if (other is Hit && !_hit && !_missed) {
       _hit = true;
       game.score.value += 1;
       paint.color = Colors.green;

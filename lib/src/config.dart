@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const gameWidth = 500.0;
 const gameHeight = 250.0;
 const notaRaio = gameWidth * 0.02;
-const hitLimit = gameWidth / 4;
+const hitPositionX = gameWidth / 4;
 
 // cores
 const jogoBackgroundColor = Color.fromARGB(255, 242, 232, 207);

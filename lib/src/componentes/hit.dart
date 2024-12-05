@@ -9,7 +9,7 @@ class Hit extends CircleComponent {
   Hit({super.key})
       : super(
             radius: notaRaio,
-            position: Vector2(hitLimit, 10),
+            position: Vector2(hitPositionX, 10),
             anchor: Anchor.topLeft,
             paint: Paint()
               ..color = hitColor
