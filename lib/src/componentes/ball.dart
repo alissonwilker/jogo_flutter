@@ -12,8 +12,10 @@ import 'components.dart';
 class Ball extends CircleComponent
     with CollisionCallbacks, HasGameReference<HitBallGame> {
   final random = math.Random();
+  final fadeInEffect = OpacityEffect.fadeIn(LinearEffectController(2));
   final fadeOutEffect = OpacityEffect.fadeOut(LinearEffectController(1));
   late final Vector2 velocity;
+
   bool _hit = false;
   bool _missed = false;
 
@@ -25,12 +27,11 @@ class Ball extends CircleComponent
               ..color = ballColor
               ..style = PaintingStyle.fill,
             children: [CircleHitbox()]) {
-    position = Vector2(gameWidth - 2 * ballRadius,
-        random.nextInt((gameHeight - size.y).toInt()).toDouble());
-    velocity =
-        Vector2(-ballStep - random.nextInt((ballStep).toInt()).toDouble(), 0);
+
+    position = Vector2(gameWidth - 2 * ballRadius, random.nextInt((gameHeight - size.y).toInt()).toDouble());
+    velocity = Vector2(- (ballStep + (ballStep * ballStepVariation) * random.nextDouble()), 0);
     opacity = 0;
-    add(OpacityEffect.fadeIn(LinearEffectController(2)));
+    add(fadeInEffect);
   }
 
   @override

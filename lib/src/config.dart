@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const gameWidth = 500.0;
 const gameHeight = 250.0;
 const ballRadius = gameWidth * 0.02;
-const hitPositionX = gameWidth / 4;
+const hitPositionX = gameWidth * 0.25;
 
 // color
 const gameBackgroundColor = Color.fromARGB(255, 242, 232, 207);
@@ -17,5 +17,6 @@ const playAreaColor = Color.fromARGB(255, 183, 239, 238);
 const hitKey = 'hitKey';
 
 // speed
-const hitCircleStep = gameHeight/50;
-const ballStep = gameWidth/5;
+const hitCircleStep = gameHeight * 0.02;
+const ballStep = gameWidth * 0.25;
+const ballStepVariation = 0.5;
