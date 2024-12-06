@@ -29,7 +29,7 @@ class HitCircle extends CircleComponent with CollisionCallbacks {
     }
   } 
 
-    @override
+  @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
