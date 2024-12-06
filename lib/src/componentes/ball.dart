@@ -12,6 +12,7 @@ import 'components.dart';
 class Ball extends CircleComponent
     with CollisionCallbacks, HasGameReference<HitBallGame> {
   final random = math.Random();
+  final fadeOutEffect = OpacityEffect.fadeOut(LinearEffectController(1));
   late final Vector2 velocity;
   bool _hit = false;
   bool _missed = false;
@@ -39,11 +40,11 @@ class Ball extends CircleComponent
 
     if (position.x < hitPositionX - size.x / 2) {
       if (opacity == 1) {
-        add(OpacityEffect.fadeOut(LinearEffectController(2)));
+        add(fadeOutEffect);
       }
       if (!_hit && !_missed) {
         _missed = true;
-        paint.color = Colors.red;
+        paint.color = ballMissedColor;
         game.score.value -= 1;
       }
     }
