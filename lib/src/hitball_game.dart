@@ -10,8 +10,7 @@ import 'config.dart';
 
 enum PlayState { welcome, playing, gameOver, won }
 
-class HitBallGame extends FlameGame
-    with HasCollisionDetection, KeyboardEvents {
+class HitBallGame extends FlameGame with HasCollisionDetection, KeyboardEvents {
   HitBallGame()
       : super(
           camera: CameraComponent.withFixedResolution(
@@ -65,10 +64,11 @@ class HitBallGame extends FlameGame
 
     world.removeAll(world.children.query<Ball>());
     world.removeAll(world.children.query<Hit>());
+    world.removeAll(world.children.query<HitCircle>());
 
     playState = PlayState.playing;
     score.value = 0;
-    
+
     world.add(Ball());
     world.add(HitCircle());
   }
@@ -82,7 +82,7 @@ class HitBallGame extends FlameGame
       case LogicalKeyboardKey.digit1:
         if (event is KeyDownEvent) {
           if (playState == PlayState.playing) {
-          var hit = Hit(key: ComponentKey.named(hitKey));
+            var hit = Hit(key: ComponentKey.named(hitKey));
             if (world.children
                 .query<Hit>()
                 .where((hit) => hit.key == ComponentKey.named(hitKey))
@@ -92,7 +92,14 @@ class HitBallGame extends FlameGame
           } else {
             startGame();
           }
-
+        }
+      case LogicalKeyboardKey.arrowDown:
+        {
+          world.children.query<HitCircle>().firstOrNull?.moveDown();
+        }
+      case LogicalKeyboardKey.arrowUp:
+        {
+          world.children.query<HitCircle>().firstOrNull?.moveUp();
         }
     }
     return KeyEventResult.handled;

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -9,19 +11,23 @@ import 'components.dart';
 
 class Ball extends CircleComponent
     with CollisionCallbacks, HasGameReference<HitBallGame> {
-  final Vector2 velocity = Vector2(-100, 0);
+  final random = math.Random();
+  late final Vector2 velocity;
   bool _hit = false;
   bool _missed = false;
 
   Ball({super.key})
       : super(
-            position: Vector2(gameWidth - 2 * ballRadius, 10),
             radius: ballRadius,
             anchor: Anchor.topLeft,
             paint: Paint()
               ..color = ballColor
               ..style = PaintingStyle.fill,
             children: [CircleHitbox()]) {
+    position = Vector2(gameWidth - 2 * ballRadius,
+        random.nextInt((gameHeight - size.y).toInt()).toDouble());
+    velocity =
+        Vector2(-ballStep - random.nextInt((ballStep).toInt()).toDouble(), 0);
     opacity = 0;
     add(OpacityEffect.fadeIn(LinearEffectController(2)));
   }
