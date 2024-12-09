@@ -60,7 +60,7 @@ class Ball extends CircleComponent
       game.score.value += 1;
       paint.color = Colors.green;
     } else if (other is PlayArea) {
-      game.world.remove(this);
+      removeFromParent();
       if (game.playState == PlayState.playing) {
         game.world.add(Ball());
       } else {
